@@ -54,6 +54,8 @@ git clone https://github.com/pytorch/fairseq.git
 cd fairseq
 sed -i 's/"hydra-core>=1.0.7,<1.1",/"hydra-core>1.0.7",/' setup.py
 sed -i 's/"omegaconf<2.1",/"omegaconf>2.0",/' setup.py
+sudo apt-get update
+sudo apt-get install g++
 python3 -m pip install ./
 cd $root_dir
 
