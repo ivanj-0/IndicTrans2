@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install unzip
+
 # Create directory structure for training and devtest
 mkdir -p indic-indic-exp/train/mun_Deva-hin_Deva
 mkdir -p indic-indic-exp/train/hin_Deva-mun_Deva
