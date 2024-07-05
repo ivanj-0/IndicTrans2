@@ -58,5 +58,7 @@ sudo apt-get update
 sudo apt-get install g++
 python3 -m pip install ./
 cd $root_dir
+pip install mosestokenizer
+pip install sacremoses
 
 echo "Setup completed!"
