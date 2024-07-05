@@ -33,7 +33,9 @@ rmdir indic-indic-exp/indic-indic-spm
 
 # Download and unzip final_bin file
 curl -L https://indictrans2-public.objectstore.e2enetworks.net/indic-indic-fairseq-dict.zip -o indic-indic-fairseq-dict.zip
-unzip indic-indic-fairseq-dict.zip -d indic-indic-exp/final_bin
-rm indic-indic-fairseq-dict.zip  # Remove the downloaded zip file after extraction
+unzip indic-indic-fairseq-dict.zip -d indic-indic-exp/
+mv indic-indic-exp/indic-indic-fairseq-dict/* indic-indic-exp/final_bin/
+rm indic-indic-fairseq-dict.zip
+rmdir indic-indic-exp/indic-indic-fairseq-dict
 
 # End of script
