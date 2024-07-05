@@ -58,6 +58,15 @@ sudo apt-get update
 sudo apt-get install parallel -y
 python3 -m pip install ./
 sudo apt-get install -y sentencepiece
+sudo apt-get install cmake build-essential pkg-config libgoogle-perftools-dev
+git clone https://github.com/google/sentencepiece.git 
+cd sentencepiece
+mkdir build
+cd build
+cmake ..
+make -j $(nproc)
+sudo make install
+sudo ldconfig -v
 cd $root_dir
 
 echo "Setup completed!"
