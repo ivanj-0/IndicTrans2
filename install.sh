@@ -57,6 +57,7 @@ sed -i 's/"omegaconf<2.1",/"omegaconf>2.0",/' setup.py
 sudo apt-get update
 sudo apt-get install parallel -y
 python3 -m pip install ./
+sudo apt-get install -y sentencepiece
 cd $root_dir
 
 echo "Setup completed!"
