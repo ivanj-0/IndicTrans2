@@ -25,8 +25,11 @@ cp dev.hin_Deva indic-indic-exp/devtest/all/hin_Deva-mun_Deva/
 
 # Download and unzip vocabulary file
 curl -L https://indictrans2-public.objectstore.e2enetworks.net/indic-indic-spm.zip -o indic-indic-spm.zip
-unzip indic-indic-spm.zip -d indic-indic-exp/vocab
-rm indic-indic-spm.zip  # Remove the downloaded zip file after extraction
+unzip indic-indic-spm.zip -d indic-indic-exp/
+mv indic-indic-exp/indic-indic-spm/* indic-indic-exp/vocab/
+rm indic-indic-spm.zip
+rmdir indic-indic-exp/indic-indic-spm
+
 
 # Download and unzip final_bin file
 curl -L https://indictrans2-public.objectstore.e2enetworks.net/indic-indic-fairseq-dict.zip -o indic-indic-fairseq-dict.zip
