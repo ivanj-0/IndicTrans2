@@ -58,19 +58,5 @@ sudo apt-get update
 sudo apt-get install g++
 python3 -m pip install ./
 cd $root_dir
-pip install mosestokenizer
-pip install sacremoses
-sudo apt install parallel -y
-sudo apt-get install cmake build-essential pkg-config libgoogle-perftools-dev -y
-git clone https://github.com/google/sentencepiece.git 
-cd sentencepiece
-mkdir build
-cd build
-cmake ..
-make -j $(nproc)
-sudo make install
-sudo ldconfig -v
-cd $root_dir
-
 
 echo "Setup completed!"
