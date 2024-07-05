@@ -23,3 +23,12 @@ source install.sh
 
 # Prepare for fine-tuning script
 source prepare_finetune_new.sh
+
+bash prepare_data_joint_finetuning.sh indic-indic-exp
+
+curl -O https://indictrans2-public.objectstore.e2enetworks.net/it2_preprint_ckpts/indic-indic.zip
+mkdir -p indic-indic
+unzip indic-indic.zip -d indic-indic
+rm indic-indic.zip
+
+bash finetune.sh indic-indic-exp transformer_18_18 indic-indic\fairseq_model\model
