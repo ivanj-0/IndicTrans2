@@ -70,5 +70,7 @@ cmake ..
 make -j $(nproc)
 sudo make install
 sudo ldconfig -v
+cd $root_dir
+
 
 echo "Setup completed!"
