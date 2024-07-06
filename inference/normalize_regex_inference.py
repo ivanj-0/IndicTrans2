@@ -78,7 +78,7 @@ def wrap_with_placeholders(text: str, patterns: list) -> Tuple[str, dict]:
             text = text.replace(match, placeholder)
             serial_no+=1
     
-    text = re.sub("\s+", " ", text)
+    text = re.sub(r"\s+", " ", text)
     
     #Regex has failure cases in trailing "/" in URLs, so this is a workaround. 
     text = text.replace(">/",">")
