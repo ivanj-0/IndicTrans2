@@ -47,7 +47,7 @@ def wrap_with_dnt_tag(text: str, pattern: str) -> str:
     for match in matches:
         text = text.replace(match, f' <dnt> {match} </dnt> ')
     
-    text = re.sub("\s+", " ", text)
+    text = re.sub(r"\s+", " ", text)
     
     return text
 
