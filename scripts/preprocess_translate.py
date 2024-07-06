@@ -80,8 +80,8 @@ def preprocess_line(
         processed_line = processed_line.replace(processed_line_match, raw_match)
     
     if remove_tag:
-        processed_line = re.sub("\s+", " ", processed_line.replace("<dnt>", " ")).strip()
-        processed_line = re.sub("\s+", " ", processed_line.replace("</dnt>", " ")).strip()
+        processed_line = re.sub(r"\s+", " ", processed_line.replace("<dnt>", " ")).strip()
+        processed_line = re.sub(r"\s+", " ", processed_line.replace("</dnt>", " ")).strip()
     
     return processed_line
     
