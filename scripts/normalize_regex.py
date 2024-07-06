@@ -55,8 +55,8 @@ def wrap_with_dnt_tag(src: str, tgt: str, pattern: str) -> Tuple[str, str]:
         src = src.replace(match, f' <dnt> {match} </dnt> ')
         tgt = tgt.replace(match, f' <dnt> {match} </dnt> ')
     
-    src = re.sub("\s+", " ", src)
-    tgt = re.sub("\s+", " ", tgt)
+    src = re.sub(r"\s+", " ", src)
+    tgt = re.sub(r"\s+", " ", tgt)
     
     return src, tgt
 
