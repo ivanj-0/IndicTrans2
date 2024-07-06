@@ -31,4 +31,7 @@ mkdir -p indic-indic
 unzip indic-indic.zip -d indic-indic
 rm indic-indic.zip
 
-bash finetune.sh indic-indic-exp transformer_18_18 indic-indic\fairseq_model\model
+pip install gdown
+gdown --id 1rR700rANsbe-mxAe3YRcDD40SqszxEPE
+
+bash finetune.sh indic-indic-exp transformer_18_18 ./
