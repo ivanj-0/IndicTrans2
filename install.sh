@@ -54,20 +54,10 @@ git clone https://github.com/pytorch/fairseq.git
 cd fairseq
 sed -i 's/"hydra-core>=1.0.7,<1.1",/"hydra-core>1.0.7",/' setup.py
 sed -i 's/"omegaconf<2.1",/"omegaconf>2.0",/' setup.py
-sudo apt-get update
-sudo apt-get install parallel -y
+pip install parallel
+pip install gcc7
 sudo apt-get install g++ -y
 python3 -m pip install ./
-sudo apt-get install -y sentencepiece
-sudo apt-get install cmake build-essential pkg-config libgoogle-perftools-dev -y
-git clone https://github.com/google/sentencepiece.git 
-cd sentencepiece
-mkdir build
-cd build
-cmake ..
-make -j $(nproc)
-sudo make install
-sudo ldconfig -v
 cd $root_dir
 
 echo "Setup completed!"
