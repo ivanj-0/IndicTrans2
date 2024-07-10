@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# Download Miniconda installer
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# # Download Miniconda installer
+# wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-# Run Miniconda installer silently (-b for batch mode, -p to specify installation path)
-bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+# # Run Miniconda installer silently (-b for batch mode, -p to specify installation path)
+# bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 
-# Add Miniconda binaries to PATH permanently
-echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
+# # Add Miniconda binaries to PATH permanently
+# echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> ~/.bashrc
+# source ~/.bashrc
 
-# Initialize conda for bash (sets up conda shell commands)
-conda init bash
-source ~/.bashrc
+# # Initialize conda for bash (sets up conda shell commands)
+# conda init bash
+# source ~/.bashrc
 
 # Clone the GitHub repository
 git clone https://github.com/ivanj-0/IndicTrans2/
