@@ -54,10 +54,22 @@ git clone https://github.com/pytorch/fairseq.git
 cd fairseq
 sed -i 's/"hydra-core>=1.0.7,<1.1",/"hydra-core>1.0.7",/' setup.py
 sed -i 's/"omegaconf<2.1",/"omegaconf>2.0",/' setup.py
-pip install parallel
+conda install conda-forge::parallel -y
 pip install gcc7
-sudo apt-get install g++ -y
 python3 -m pip install ./
+git clone https://github.com/google/sentencepiece.git
+cd sentencepiece
+mkdir build
+cd build
+cmake ..
+make -j $(nproc)
+mkdir -p ~/local
+make install DESTDIR=~/local
+export PATH=~/local/usr/local/bin:$PATH
+export LD_LIBRARY_PATH=~/local/usr/local/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=~/local/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+source ~/.bashrc
+conda activate itv2
 cd $root_dir
 
 echo "Setup completed!"
