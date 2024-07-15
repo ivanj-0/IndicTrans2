@@ -35,7 +35,6 @@ flores_codes = {
     "tam_Taml": "ta",
     "tel_Telu": "te",
     "urd_Arab": "ur",
-    "mun_Deva": "hi",
 }
 
 
