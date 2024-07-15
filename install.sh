@@ -57,6 +57,7 @@ sed -i 's/"omegaconf<2.1",/"omegaconf>2.0",/' setup.py
 conda install conda-forge::parallel -y
 pip install gcc7
 python3 -m pip install ./
+cd $root_dir
 git clone https://github.com/google/sentencepiece.git
 cd sentencepiece
 mkdir build
