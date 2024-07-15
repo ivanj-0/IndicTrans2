@@ -26,11 +26,6 @@ source prepare_finetune_new.sh
 
 bash prepare_data_joint_finetuning.sh indic-indic-exp
 
-curl -O https://indictrans2-public.objectstore.e2enetworks.net/it2_preprint_ckpts/indic-indic.zip
-mkdir -p indic-indic
-unzip indic-indic.zip -d indic-indic
-rm indic-indic.zip
-
 pip install gdown
 gdown --id 1rR700rANsbe-mxAe3YRcDD40SqszxEPE
 
