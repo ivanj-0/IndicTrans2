@@ -2,6 +2,9 @@
 
 pip install unzip
 
+mv train.mun_Deva train.snd_Deva
+mv dev.mun_Deva dev.snd_Deva
+
 # Create directory structure for training and devtest
 mkdir -p indic-indic-exp/train/snd_Deva-hin_Deva
 mkdir -p indic-indic-exp/train/hin_Deva-snd_Deva
