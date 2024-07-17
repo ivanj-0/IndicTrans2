@@ -35,6 +35,10 @@ fi
 # get a list of language pairs in the `train_data_dir`
 pairs=$(ls -d $train_data_dir/* | sort)
 
+# Initialize flags for Olck language
+src_olck=False
+tgt_olck=False
+deva="Deva"
 
 # iterate over each language pair
 for pair in ${pairs[@]}; do
@@ -50,20 +54,8 @@ for pair in ${pairs[@]}; do
 	mkdir -p $devtest_norm_dir
 
     
-    # check if the source language text requires transliteration
     src_transliterate="true"
-    if [[ $src_lang == *"Arab"* ]] || [[ $src_lang == *"Olck"* ]] || \
-        [[ $src_lang == *"Mtei"* ]] || [[ $src_lang == *"Latn"* ]]; then
-        src_transliterate="false"
-    fi
-    
-    # check if the target language text requires transliteration
     tgt_transliterate="true"
-    if [[ $tgt_lang == *"Arab"* ]] || [[ $tgt_lang == *"Olck"* ]] || \
-        [[ $tgt_lang == *"Mtei"* ]] || [[ $tgt_lang == *"Latn"* ]]; then
-        tgt_transliterate="false"
-    fi
-
 
     # --------------------------------------------------------------------------
     #                           train preprocessing
@@ -75,12 +67,31 @@ for pair in ${pairs[@]}; do
 
     echo "Normalizing punctuations for train"
     if $parallel_installed; then
-        parallel --pipe --keep-order bash $root/normalize_punctuation.sh $src_lang < $train_infname_src > $train_outfname_src._norm
-        parallel --pipe --keep-order bash $root/normalize_punctuation.sh $tgt_lang < $train_infname_tgt > $train_outfname_tgt._norm
+        if src_olck; then
+            parallel --pipe --keep-order bash $root/normalize_punctuation.sh $deva < $train_infname_src > $train_outfname_src._norm
+        else
+            parallel --pipe --keep-order bash $root/normalize_punctuation.sh $src_lang < $train_infname_src > $train_outfname_src._norm
+        fi
+
+        if tgt_olck; then
+            parallel --pipe --keep-order bash $root/normalize_punctuation.sh $deva < $train_infname_tgt > $train_outfname_tgt._norm
+        else
+            parallel --pipe --keep-order bash $root/normalize_punctuation.sh $tgt_lang < $train_infname_tgt > $train_outfname_tgt._norm
+        fi
     else
-        bash $root/normalize_punctuation.sh $src_lang < $train_infname_src > $train_outfname_src._norm
-        bash $root/normalize_punctuation.sh $tgt_lang < $train_infname_tgt > $train_outfname_tgt._norm
+        if src_olck; then
+            bash $root/normalize_punctuation.sh $deva < $train_infname_src > $train_outfname_src._norm
+        else
+            bash $root/normalize_punctuation.sh $src_lang < $train_infname_src > $train_outfname_src._norm
+        fi
+
+        if tgt_olck; then
+            bash $root/normalize_punctuation.sh $deva < $train_infname_tgt > $train_outfname_tgt._norm
+        else
+            bash $root/normalize_punctuation.sh $tgt_lang < $train_infname_tgt > $train_outfname_tgt._norm
+        fi
     fi
+
 
 	# add do not translate tags to handle special failure cases
     echo "Applying do not translate tags for train"
@@ -88,8 +99,16 @@ for pair in ${pairs[@]}; do
 
 	echo "Applying normalization and script conversion for train"
     # this script preprocesses the text and for indic languages, converts script to devanagari if needed
-	input_size=`python3 scripts/preprocess_translate.py $train_outfname_src.norm $train_outfname_src $src_lang $src_transliterate false`
-	input_size=`python3 scripts/preprocess_translate.py $train_outfname_tgt.norm $train_outfname_tgt $tgt_lang $tgt_transliterate true`
+  if src_olck; then
+      input_size=`python3 scripts/preprocess_translate.py $train_outfname_src.norm $train_outfname_src $deva $src_transliterate false`
+  else
+      input_size=`python3 scripts/preprocess_translate.py $train_outfname_src.norm $train_outfname_src $src_lang $src_transliterate false`
+  fi
+  if tgt_olck; then
+      input_size=`python3 scripts/preprocess_translate.py $train_outfname_tgt.norm $train_outfname_tgt $deva $tgt_transliterate true`
+  else
+      input_size=`python3 scripts/preprocess_translate.py $train_outfname_tgt.norm $train_outfname_tgt $tgt_lang $tgt_transliterate true`
+  fi
 	echo "Number of sentences in train: $input_size"
 
 
@@ -109,6 +128,31 @@ for pair in ${pairs[@]}; do
         bash normalize_punctuation.sh $src_lang < $dev_infname_src > $dev_outfname_src._norm
         bash normalize_punctuation.sh $tgt_lang < $dev_infname_tgt > $dev_outfname_tgt._norm
     fi
+    if $parallel_installed; then
+        if src_olck; then
+            parallel --pipe --keep-order bash normalize_punctuation.sh $deva < $dev_infname_src > $dev_outfname_src._norm
+        else
+            parallel --pipe --keep-order bash normalize_punctuation.sh $src_lang < $dev_infname_src > $dev_outfname_src._norm
+        fi
+
+        if tgt_olck; then
+            parallel --pipe --keep-order bash normalize_punctuation.sh $deva < $dev_infname_tgt > $dev_outfname_tgt._norm
+        else
+            parallel --pipe --keep-order bash normalize_punctuation.sh $tgt_lang < $dev_infname_tgt > $dev_outfname_tgt._norm
+        fi
+    else
+        if src_olck; then
+            bash normalize_punctuation.sh $deva < $dev_infname_src > $dev_outfname_src._norm
+        else
+            bash normalize_punctuation.sh $src_lang < $dev_infname_src > $dev_outfname_src._norm
+        fi
+
+        if tgt_olck; then
+            bash normalize_punctuation.sh $deva < $dev_infname_tgt > $dev_outfname_tgt._norm
+        else
+            bash normalize_punctuation.sh $tgt_lang < $dev_infname_tgt > $dev_outfname_tgt._norm
+        fi
+    fi
 
 	# add do not translate tags to handle special failure cases
     echo "Applying do not translate tags for dev"
@@ -118,6 +162,16 @@ for pair in ${pairs[@]}; do
     # this script preprocesses the text and for indic languages, converts script to devanagari if needed
 	input_size=`python scripts/preprocess_translate.py $dev_outfname_src.norm $dev_outfname_src $src_lang $src_transliterate false`
 	input_size=`python scripts/preprocess_translate.py $dev_outfname_tgt.norm $dev_outfname_tgt $tgt_lang $tgt_transliterate true`
+	if src_olck; then
+      input_size=`python scripts/preprocess_translate.py $dev_outfname_src.norm $dev_outfname_src $deva $src_transliterate false`
+  else
+      input_size=`python scripts/preprocess_translate.py $dev_outfname_src.norm $dev_outfname_src $src_lang $src_transliterate false`
+  fi
+  if tgt_olck; then
+      input_size=`python scripts/preprocess_translate.py $dev_outfname_tgt.norm $dev_outfname_tgt $deva $tgt_transliterate true`
+  else
+      input_size=`python scripts/preprocess_translate.py $dev_outfname_tgt.norm $dev_outfname_tgt $tgt_lang $tgt_transliterate true`
+  fi
 	echo "Number of sentences in dev: $input_size"
 done
 
