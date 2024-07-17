@@ -1,10 +1,5 @@
 #!/bin/bash
 
-pip install unzip
-
-mv train.mun_Deva train.sat_Olck
-mv dev.mun_Deva dev.sat_Olck
-
 # Create directory structure for training and devtest
 mkdir -p indic-indic-exp/train/sat_Olck-hin_Deva
 mkdir -p indic-indic-exp/train/hin_Deva-sat_Olck
