@@ -18,7 +18,7 @@ python3 -m pip install --upgrade pip
 # --------------------------------------------------------------
 #                   PyTorch Installation
 # --------------------------------------------------------------
-python3 -m pip install torch --extra-index-url https://download.pytorch.org/whl/cu118
+python3 -m pip install torch
 
 
 # --------------------------------------------------------------
@@ -37,7 +37,6 @@ cd $root_dir
 #               Install additional utility packages
 # --------------------------------------------------------------
 python3 -m pip install nltk sacremoses regex pandas mock transformers==4.28.1 sacrebleu==2.3.1 urduhack[tf] mosestokenizer ctranslate2==3.9.0 gradio
-python3 -c "import urduhack; urduhack.download()"
 python3 -c "import nltk; nltk.download('punkt')"
 
 # --------------------------------------------------------------
