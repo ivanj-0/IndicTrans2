@@ -2,29 +2,29 @@
 
 pip install unzip
 
-mv train.mun_Deva train.snd_Deva
-mv dev.mun_Deva dev.snd_Deva
+mv train.mun_Deva train.sat_Olck
+mv dev.mun_Deva dev.sat_Olck
 
 # Create directory structure for training and devtest
-mkdir -p indic-indic-exp/train/snd_Deva-hin_Deva
-mkdir -p indic-indic-exp/train/hin_Deva-snd_Deva
+mkdir -p indic-indic-exp/train/sat_Olck-hin_Deva
+mkdir -p indic-indic-exp/train/hin_Deva-sat_Olck
 
-mkdir -p indic-indic-exp/devtest/all/snd_Deva-hin_Deva
-mkdir -p indic-indic-exp/devtest/all/hin_Deva-snd_Deva
+mkdir -p indic-indic-exp/devtest/all/sat_Olck-hin_Deva
+mkdir -p indic-indic-exp/devtest/all/hin_Deva-sat_Olck
 
 # Copy training files to respective directories
-cp train.snd_Deva indic-indic-exp/train/snd_Deva-hin_Deva/
-cp train.hin_Deva indic-indic-exp/train/snd_Deva-hin_Deva/
+cp train.sat_Olck indic-indic-exp/train/sat_Olck-hin_Deva/
+cp train.hin_Deva indic-indic-exp/train/sat_Olck-hin_Deva/
 
-cp train.snd_Deva indic-indic-exp/train/hin_Deva-snd_Deva/
-cp train.hin_Deva indic-indic-exp/train/hin_Deva-snd_Deva/
+cp train.sat_Olck indic-indic-exp/train/hin_Deva-sat_Olck/
+cp train.hin_Deva indic-indic-exp/train/hin_Deva-sat_Olck/
 
 # Copy devtest files to respective directories
-cp dev.snd_Deva indic-indic-exp/devtest/all/snd_Deva-hin_Deva/
-cp dev.hin_Deva indic-indic-exp/devtest/all/snd_Deva-hin_Deva/
+cp dev.sat_Olck indic-indic-exp/devtest/all/sat_Olck-hin_Deva/
+cp dev.hin_Deva indic-indic-exp/devtest/all/sat_Olck-hin_Deva/
 
-cp dev.snd_Deva indic-indic-exp/devtest/all/hin_Deva-snd_Deva/
-cp dev.hin_Deva indic-indic-exp/devtest/all/hin_Deva-snd_Deva/
+cp dev.sat_Olck indic-indic-exp/devtest/all/hin_Deva-sat_Olck/
+cp dev.hin_Deva indic-indic-exp/devtest/all/hin_Deva-sat_Olck/
 
 # Download and unzip vocabulary file
 curl -L https://indictrans2-public.objectstore.e2enetworks.net/indic-indic-spm.zip -o indic-indic-spm.zip
