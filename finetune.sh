@@ -36,7 +36,7 @@ fairseq-train $exp_dir/final_bin \
 --fp16 \
 --user-dir model_configs \
 --update-freq=4 \
---distributed-world-size 8 \
+--distributed-world-size 1 \
 --num-workers 24 \
 --max-tokens 1024 \
 --eval-bleu \
